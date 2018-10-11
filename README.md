@@ -1,2 +1,4 @@
-# Fisica_Computacional_Michael_Vicente
+# Fisica Computacional 
+Nombre: Michael Haacke 
+Nombre: Vicente 
 Aqui colocare las tareas de fisica computacional
