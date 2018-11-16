@@ -22,5 +22,5 @@ Luego se debe correr plot.py para realizar las animaciones. Esto se hace escribi
 
 	python plot.py
 
-
+La animacion tiene problemas en mac os.
 	
