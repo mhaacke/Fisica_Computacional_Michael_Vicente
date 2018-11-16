@@ -1,19 +1,20 @@
-//  main.c
-//  p01-explicit_euler
+//  main_implicit.c
+//  
 //
-//  Resolucion de la ley de Stefan-Boltzmann mediante diferentes
-//  integradores.
+//  Resolucion de la la ecuacion de calor de una barra 1-d dependiente del tiempo
+//  mediante el metodo de crank-michelson
 //
 //  Created by Edgardo Dörner on 9/3/18.
 //  Copyright © 2018 Edgardo Dörner. All rights reserved.
-//  Modified by Michael Haacke
+//  Modified by Michael Haacke and Vicente Salinas
 
-// Parametros del problema
+
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 
+// Parametros del problema 
 const double L = 10.0;  // largo de la barra
 const double T0 = 0.0;  // temperatura extremo izquierdo
 const double TN = 2.0;  // temperatura extremo derecho
@@ -27,19 +28,16 @@ const double xf  = L;       // frontera final
 const int n = 21;   //1 +  (int)(((xf - xi)/h));
 double dt;
 
+// Declaracion de las funciones a utilizar.
 void F(double y[n], double dydt[n]);
 void tridag(double r[], double u[], int ne);
 
+// Funcion principal
 int main(int argc, const char * argv[]) {
    // Parametros del sistema.
     
     dt = 0.1;
-    
-    // A partir de los parametros del sistema calculamos el numero de
-    // nodos de la grilla
-    
 
-    
     printf("*************************************************\n");
     printf(" Resolucion de la ecuacion de calor  \n");
     printf(" mediante diferencias finitas                    \n");
@@ -54,13 +52,6 @@ int main(int argc, const char * argv[]) {
     time_space[0][0] = T0;
     time_space[0][n-1] = TN;
 
-   
-    
-    printf("Parametros del problema\n");
-    printf("\t a \t\t= \t%10.2f \n", time_space[0][0]);
-    printf("\t b \t\t= \t%10.2f \n", time_space[nstep-1][n-1]);
-    printf("\t n \t\t= \t%10d\n", n);
-    printf("\t h \t\t= \t%10.3f \n", h);
     
     // Resolucion de la ecuacion diferencial mediante el metodo de crank-michelson, con este metodo implicito
     // se logra crear un sistema de ecuaciones tridiagonales, las cuales son resuletas con un algoritmo obtenido
