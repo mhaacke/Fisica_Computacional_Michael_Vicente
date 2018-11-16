@@ -21,3 +21,6 @@ Como requerimientos, para graficar los datos se debe tener Python 2 junto con lo
 Luego se debe correr plot.py para realizar las animaciones. Esto se hace escribiendo
 
 	python plot.py
+
+
+	

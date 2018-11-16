@@ -62,21 +62,23 @@ int main(int argc, const char * argv[]) {
     printf("\t n \t\t= \t%10d\n", n);
     printf("\t h \t\t= \t%10.3f \n", h);
     
-    // Resolucion de la ecuacion diferencial mediante el Metodo de eRK-4.
-    
+    // Resolucion de la ecuacion diferencial mediante el metodo de crank-michelson, con este metodo implicito
+    // se logra crear un sistema de ecuaciones tridiagonales, las cuales son resuletas con un algoritmo obtenido
+    // del libro "Numerical recipes in C.” Cambridge University Press 1 (1988), con esto se obtiene los resultados
+    // deseados forzando siempre las condiciones de borde
     double rest[n] = {0};
 
     for (int i=0; i<nstep-1; i++) {     
         time_space[i][0] = T0;
         time_space[i][n-1] = TN;
-        F(time_space[i],rest);   
-        // Evolucion temporal mediante e-RK4.
+        F(time_space[i],rest);
         tridag(rest,time_space[i+1],n);
         time_space[i][0] =T0;
         time_space[i][n-1] =TN;
            
     }
-    // Guardamos los resultados en un archivo para su analisis posterior.
+    // Guardamos los resultados en un archivo para su analisis posterior, las columnas represetan los tiempos di-
+    // derentes y la primera columna es el eje x
     FILE *fp = fopen("output1.txt", "w");
     for (int i=0; i<n; i++) {
         fprintf(fp, "%10.5lf, ",i*h);
@@ -93,6 +95,8 @@ int main(int argc, const char * argv[]) {
     return 0;
 }
 
+
+// funcion que obtiene el vector igualado , es la derivada parcial mas la solucion particular de la edo.
 void F(double y[n], double dydt[n]) {
 
     dydt[0] = T0;
@@ -105,7 +109,7 @@ void F(double y[n], double dydt[n]) {
     return;
 }
 
-// from Numerica recipes in C and modified vy michael (a,b,c) are all costants after expanding with crank-michelson
+// from Numerica recipes in C and modified by michael (a,b,c) are all costants after expanding with crank-michelson
 void tridag(double r[], double u[], int ne)
 //Solves for a vector u[1..n] the tridiagonal linear set given by equation (2.4.1). a[1..n], b[1..n], c[1..n], and r[1..n] are input vectors and are not modified.
 {
