@@ -1,11 +1,12 @@
 ### Proyecto Final Del Curso
 
+Autores:
 
-Nombre: Michael Haacke Concha
+	Nombre: Michael Haacke Concha
 
-Nombre: Vicente Salinas Froemel
+	Nombre: Vicente Salinas Froemel
 
-Para compilar el codigo se debe correr 
+	Para compilar el codigo se debe correr 
 
 	gcc -o main main.c
 
