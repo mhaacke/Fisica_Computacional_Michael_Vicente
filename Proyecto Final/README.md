@@ -6,9 +6,9 @@ Autores:
 
 	Nombre: Vicente Salinas Froemel
 
-	Para compilar el codigo se debe correr 
+Para compilar el codigo se debe correr 
 
-	gcc -o main main.c
+	gcc -o main main.c -lm
 
 Luego para correr el codigo se debe realizar 
 
