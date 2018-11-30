@@ -35,12 +35,12 @@ def Transpose(data):
 	return [[data[k][j] for k in range(rows)] for j in range(cols)]
 
 def animate(i):
-    line.set_ydata(data[i+1])  # update the data
-    return line,
+    line.set_ydata(np.array(data[i+1]).astype(float))  # update the data
+    return [line,]
 
 def init():
-    line.set_ydata(np.ma.array(x, mask=True))
-    return line,
+    line.set_ydata(np.array(data[1]).astype(float))
+    return [line,]
 
 data = Transpose(Open('output.txt'))
 
@@ -48,27 +48,63 @@ data = Transpose(Open('output.txt'))
 fig, ax = plt.subplots()
 #plt.switch_backend("TkAgg")
 x = data[0]
-y = data[1]
+y = data[2]
 # Convertir los datos a punto flotante.
-x = np.array(x).astype(float)
-y = np.array(y).astype(float)
+x1 = np.array(x).astype(float)
+y1 = np.array(y).astype(float)
 lasty = np.array(data[299]).astype(float)
 # Determinar las proporciones de los limites del grafico.
-Maxx,Minx,Maxy,Miny = max(x),min(x),max(lasty),min(lasty)
+Maxx,Minx,Maxy,Miny = max(x1),min(x1),max(lasty),min(lasty)
 propx = (Maxx-Minx)/20.
 propy = (Maxy-Miny)/20.
-lim1 = Minx-propx
-lim2 = Maxx+propx
-lim3 = Miny-propy
-lim4 = Maxy+propy
+lim1 = 0
+lim2 =20
+lim3 =0
+lim4 =4
 line, = ax.plot(x,y,color = 'darkblue',marker = '',markerfacecolor = 'darkblue',markersize = 5,linestyle = '-',linewidth = 1)
 ax.set_xlim((lim1,lim2))
 ax.set_ylim((lim3,lim4))
 ax.set_xlabel('x',fontsize = '30',color = 'black')
 ax.set_ylabel('y',fontsize = '30',color = 'black')
-ax.grid(color = '0.5', linestyle = ':', linewidth = 1)
-ani = animation.FuncAnimation(fig, animate, np.arange(1, 300), init_func=init, interval=50, blit=True)
+# ax.grid(color = '0.5', linestyle = ':', linewidth = 1)
+# ani = animation.FuncAnimation(fig, animate, np.arange(1, 299), init_func=init, interval=50, blit=True)
 plt.show()
+print(fig,ax)
+
+# import numpy as np
+# import matplotlib.pyplot as plt
+# import matplotlib.animation as animation
+
+# fig, ax = plt.subplots()
+
+# #x = np.arange(0, 2*np.pi, 0.01)
+# # line, = ax.plot(x, data[1])
+
+
+# def init():  # only required for blitting to give a clean slate.
+#     line.set_ydata(data[1])
+#     return line,
+
+
+# def animate(i):
+#     line.set_ydata(data[i+1])  # update the data.
+#     return line,
+
+
+# ani = animation.FuncAnimation(
+#     fig, animate,np.arange(1, 299), init_func=init, interval=2, blit=True, save_count=50)
+
+# # To save the animation, use e.g.
+# #
+# # ani.save("movie.mp4")
+# #
+# # or
+# #
+# # from matplotlib.animation import FFMpegWriter
+# # writer = FFMpegWriter(fps=15, metadata=dict(artist='Me'), bitrate=1800)
+# # ani.save("movie.mp4", writer=writer)
+
+# plt.show()
 
 
 
